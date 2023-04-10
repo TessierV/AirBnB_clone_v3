@@ -1,0 +1,16 @@
+Vanessa - 04/10:
+fix comment made by "821-N"
+in the (tests/test_models_test_base_model.py) line 85-92
+
+tic = datetime.utcnow()
+"""tic = datetime.now()"""
+inst1 = BaseModel()
+"""toc = datetime.now()"""
+toc = datetime.utcnow()
+self.assertTrue(tic <= inst1.created_at <= toc)
+time.sleep(1e-4)
+tic = datetime.utcnow()
+"""tic = datetime.now()"""
+inst2 = BaseModel()
+"""toc = datetime.now()"""
+toc = datetime.utcnow()
