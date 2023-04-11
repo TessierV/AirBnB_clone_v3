@@ -74,13 +74,8 @@ class FileStorage:
         Returns the object based on the class and its ID,
         or None if not found
         """
-        try:
-            for obj in self.all(cls).values():
-                if obj.id == id:
-                    return obj
-        except:
-            pass
-        return None
+        return self.__session.query(cls).filter_by(id=id).first() \
+            if cls and id else None
 
     def count(self, cls=None):
         """
@@ -88,4 +83,7 @@ class FileStorage:
         the given class. If no class is passed, returns
         the count of all objects in storage.
         """
-        return len(self.all(cls))
+        if cls is None:
+            return(len(self.all()))
+        else :
+            return(len(self.all(cls)))
