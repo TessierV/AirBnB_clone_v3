@@ -71,11 +71,11 @@ class FileStorage:
 
     def get(self, cls, id):
         """
-        Returns the object based on the class and its ID,
-        or None if not found
+            return the specific object based on the class and its ID,
+            or None if not found
         """
-        return self.__session.query(cls).filter_by(id=id).first() \
-            if cls and id else None
+        query = f"{str(cls.__name__)}.{id}"
+        return(self.__objects.get(query))
 
     def count(self, cls=None):
         """
