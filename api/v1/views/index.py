@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """ Index file """
-from flask import jsonify
 from api.v1.views import app_views
+from flask import jsonify
 from models import storage
 
 
-@app_views.route('/stats', strict_slashes=False)
+@app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def app_views_stats():
     """ Create an endpoint that retrieves
     the number of each objects by type """
@@ -20,6 +20,6 @@ def app_views_stats():
     return jsonify(stats_obj)
 
 
-@app_views.route("/status", methods=['GET'], strict_slashes=False)
+@app_views.route("/status", strict_slashes=False)
 def status():
     return jsonify({"status": "OK"})
