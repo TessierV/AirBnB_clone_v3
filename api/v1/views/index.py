@@ -5,6 +5,11 @@ from flask import jsonify
 from models import storage
 
 
+@app_views.route("/status", strict_slashes=False)
+def status():
+    return jsonify({"status": "OK"})
+
+
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def app_views_stats():
     """ Create an endpoint that retrieves
@@ -18,8 +23,3 @@ def app_views_stats():
         'users': storage.count('User')
     }
     return jsonify(stats_obj)
-
-
-@app_views.route("/status", strict_slashes=False)
-def status():
-    return jsonify({"status": "OK"})
