@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ API Flask app module """
-from flask import Flask, jsonify
+from flask import make_response, Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 import os
@@ -15,6 +15,11 @@ def teardown(exception):
     """ closes the storage on teardown """
     if exception:
         storage.close()
+
+
+@app.errorhandler(404)
+def resource_not_found(e):
+    return jsonify(error=str({"error": "Not found"})), 404
 
 
 if __name__ == "__main__":
