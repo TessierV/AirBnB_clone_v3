@@ -40,7 +40,7 @@ def create_amenity():
     elif 'name' not in create_amenity:
         abort(400, description="Missing name" )
     else:
-        new_amenity = Amenity(**data_json)
+        new_amenity = Amenity(**create_amenity)
         storage.new(new_amenity)
         storage.save()
         return jsonify(new_amenity.to_dict()), 201
@@ -57,7 +57,7 @@ def update_amenity(amenity_id):
         abort(400, description="Not a JSON")
     else:
         for key, val in request_json.items():
-            if key not in ['id', 'created_at', 'updated_at']:
+            if key not in ['id', 'email', 'created_at', 'updated_at']:
                 setattr(amenity, key, val)
         storage.save()
         return jsonify(amenity.to_dict()), 200
