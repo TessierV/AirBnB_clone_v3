@@ -16,7 +16,8 @@ def get_user():
     return jsonify(users_list)
 
 
-@app_views.route('/users/<user_id>', strict_slashes=False, methods=['GET', 'DELETE'])
+@app_views.route('/users/<user_id>', strict_slashes=False,
+                 methods=['GET', 'DELETE'])
 def get_user_id(user_id):
     """Testing documentation of a module"""
     user = storage.get(User, user_id)
@@ -38,9 +39,9 @@ def create_user():
     if create_user is None:
         abort(400, description="Not a JSON")
     elif 'email' not in create_user:
-        abort(400, description="Missing email" )
+        abort(400, description="Missing email")
     elif 'password' not in create_user:
-        abort(400, description="Missing password" )
+        abort(400, description="Missing password")
     else:
         new_user = User(**create_data)
         storage.new(new_user)

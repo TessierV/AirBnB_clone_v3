@@ -9,7 +9,8 @@ from models.city import City
 from models.user import User
 
 
-@app_views.route('/cities/<city_id>/places', methods=['GET'], strict_slashes=False)
+@app_views.route('/cities/<city_id>/places',
+                 methods=['GET'], strict_slashes=False)
 def get_place_city():
     """Testing documentation of a module"""
     places_list = []
@@ -21,7 +22,8 @@ def get_place_city():
     return jsonify(places_list)
 
 
-@app_views.route('/places/<place_id>', strict_slashes=False, methods=['GET', 'DELETE'])
+@app_views.route('/places/<place_id>',
+                 strict_slashes=False, methods=['GET', 'DELETE'])
 def get_place(place_id):
     """Testing documentation of a module"""
     place = storage.get(Place, place_id)
@@ -36,7 +38,8 @@ def get_place(place_id):
         return jsonify({}), 200
 
 
-@app_views.route('/cities/<city_id>/places', strict_slashes=False, methods=['POST'])
+@app_views.route('/cities/<city_id>/places',
+                 strict_slashes=False, methods=['POST'])
 def post_place(city_id):
     """Testing documentation of a module"""
     create_data = request.get_json()
@@ -46,9 +49,9 @@ def post_place(city_id):
     if create_data is None:
         abort(400, description="Not a JSON")
     elif 'user_id' not in create_data:
-        abort(400, description="Missing user_id" )
+        abort(400, description="Missing user_id")
     elif 'name' not in create_data:
-        abort(400, description="Missing name" )
+        abort(400, description="Missing name")
     if storage.get(User, create_data['user_id']) is None:
         abort(404)
     else:

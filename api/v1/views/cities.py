@@ -8,7 +8,8 @@ from models.city import City
 from models.state import State
 
 
-@app_views.route('/states/<state_id>/cities', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities',
+                 methods=['GET'], strict_slashes=False)
 def get_cities():
     """Testing documentation of a module"""
     cities_list = []
@@ -20,7 +21,8 @@ def get_cities():
     return jsonify(cities_list)
 
 
-@app_views.route('/cities/<city_id>', strict_slashes=False, methods=['GET', 'DELETE'])
+@app_views.route('/cities/<city_id>',
+                 strict_slashes=False, methods=['GET', 'DELETE'])
 def get_city(city_id):
     """Testing documentation of a module"""
     city = storage.get(City, city_id)
@@ -35,7 +37,8 @@ def get_city(city_id):
         return jsonify({}), 200
 
 
-@app_views.route('/states/<state_id>/cities', strict_slashes=False, methods=['POST'])
+@app_views.route('/states/<state_id>/cities',
+                 strict_slashes=False, methods=['POST'])
 def create_city(state_id):
     """Testing documentation of a module"""
     create_data = request.get_json()
@@ -43,7 +46,7 @@ def create_city(state_id):
     if create_data is None:
         abort(400, description="Not a JSON")
     elif 'name' not in create_data:
-        abort(400, description="Missing name" )
+        abort(400, description="Missing name")
     elif storage.get(State, state_id) is None:
         abort(404)
     else:

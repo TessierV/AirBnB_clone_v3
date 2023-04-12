@@ -16,7 +16,8 @@ def get_amenity():
     return jsonify(amenity_list)
 
 
-@app_views.route('/amenities/<amenity_id>', strict_slashes=False, methods=['GET', 'DELETE'])
+@app_views.route('/amenities/<amenity_id>',
+                 strict_slashes=False, methods=['GET', 'DELETE'])
 def get_amenity_id(amenity_id):
     """Testing documentation of a module"""
     amenity = storage.get(Amenity, amenity_id)
@@ -38,7 +39,7 @@ def create_amenity():
     if create_amenity is None:
         abort(400, description="Not a JSON")
     elif 'name' not in create_amenity:
-        abort(400, description="Missing name" )
+        abort(400, description="Missing name")
     else:
         new_amenity = Amenity(**create_amenity)
         storage.new(new_amenity)
@@ -46,7 +47,8 @@ def create_amenity():
         return jsonify(new_amenity.to_dict()), 201
 
 
-@app_views.route('/amenities/<amenity_id>', strict_slashes=False, methods=['PUT'])
+@app_views.route('/amenities/<amenity_id>',
+                 strict_slashes=False, methods=['PUT'])
 def update_amenity(amenity_id):
     """Testing documentation of a module"""
     amenity = storage.get(Amenity, amenity_id)
