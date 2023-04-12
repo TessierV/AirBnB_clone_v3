@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""
-import for the file
+"""import for the file
 """
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request
@@ -9,8 +8,7 @@ from models.state import State
 
 @app_views.route("/states", methods=['GET'], strict_slashes=False)
 def GET_all_State():
-  """
-  all states
+  """all states
   """
   state_list = []
   for state in storage.all(State).values():
@@ -19,8 +17,7 @@ def GET_all_State():
 
 @app_views.route("/states/<state_id>", methods=['GET'], strict_slashes=False)
 def GET_State(state_id):
-    """
-    get a state
+    """get a state
     """
     state = storage.get(State, state_id)
     if state:
@@ -30,8 +27,7 @@ def GET_State(state_id):
 
 @app_views.route("/states/<state_id>", methods=['DELETE'], strict_slashes=False)
 def DELETE_State(state_id):
-    """
-    delete a state
+    """delete a state
     """
     state = storage.get(State, state_id)
     if state:
@@ -43,8 +39,7 @@ def DELETE_State(state_id):
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def POST_State():
-    """
-    create a state
+    """create a state
     """
     req_dict = request.get_json()
     if not req_dict:
@@ -57,8 +52,7 @@ def POST_State():
 
 @app_views.route("/states/<state_id>", methods=['PUT'], strict_slashes=False)
 def PUT_State(state_id):
-    """
-    update a state
+    """update a state
     """
     state = storage.get(State, state_id)
     req_dict = request.get_json()
