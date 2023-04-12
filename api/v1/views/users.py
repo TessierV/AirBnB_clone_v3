@@ -8,6 +8,7 @@ from models.user import User
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
 def get_user():
+    """ index """
     users_list = []
     for user in storage.all(User).values():
         users_list.append(user.to_dict())
