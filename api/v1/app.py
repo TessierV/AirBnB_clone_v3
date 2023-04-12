@@ -19,6 +19,7 @@ def teardown(exception):
 
 @app.errorhandler(404)
 def resource_not_found(e):
+    """ closes the storage on teardown """
     return jsonify(error=str("Not found")), 404
 
 
