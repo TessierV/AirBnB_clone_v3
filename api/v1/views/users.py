@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" index """
+"""Testing documentation of a module
+"""
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models import storage
@@ -8,7 +9,7 @@ from models.user import User
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
 def get_user():
-    """ index """
+    """Testing documentation of a module"""
     users_list = []
     for user in storage.all(User).values():
         users_list.append(user.to_dict())
@@ -17,7 +18,7 @@ def get_user():
 
 @app_views.route('/users/<user_id>', strict_slashes=False, methods=['GET', 'DELETE'])
 def get_user_id(user_id):
-    """ index """
+    """Testing documentation of a module"""
     user = storage.get(User, user_id)
     if user is None:
         abort(404)
@@ -32,7 +33,7 @@ def get_user_id(user_id):
 
 @app_views.route('/users', strict_slashes=False, methods=['POST'])
 def create_user():
-    """ index """
+    """Testing documentation of a module"""
     create_user = request.get_json()
     if create_user is None:
         abort(400, description="Not a JSON")
@@ -49,7 +50,7 @@ def create_user():
 
 @app_views.route('/users/<user_id>', strict_slashes=False, methods=['PUT'])
 def update_user(user_id):
-    """ index """
+    """Testing documentation of a module"""
     user = storage.get(User, user_id)
     request_json = request.get_json()
     if user is None:
