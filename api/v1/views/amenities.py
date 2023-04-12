@@ -42,24 +42,24 @@ def create_amenity():
     elif 'password' not in create_amenity:
         abort(400, description="Missing password" )
     else:
-        new_user = Amenities(**data_json)
-        storage.new(new_user)
+        new_amenity = Amenity(**data_json)
+        storage.new(new_amenity)
         storage.save()
-        return jsonify(new_user.to_dict()), 201
+        return jsonify(new_amenity.to_dict()), 201
 
 
-@app_views.route('/users/<user_id>', strict_slashes=False, methods=['PUT'])
-def update_user(user_id):
+@app_views.route('/amenities/<amenity_id>', strict_slashes=False, methods=['PUT'])
+def update_amenity(amenity_id):
     """Testing documentation of a module"""
-    user = storage.get(Amenities, user_id)
+    amenity = storage.get(Amenity, amenity_id)
     request_json = request.get_json()
-    if user is None:
+    if amenity is None:
         abort(404)
     elif request_json is None:
         abort(400, description="Not a JSON")
     else:
         for key, val in request_json.items():
             if key not in ['id', 'email', 'created_at', 'updated_at']:
-                setattr(user, key, val)
+                setattr(amenity, key, val)
         storage.save()
-        return jsonify(user.to_dict()), 200
+        return jsonify(amenity.to_dict()), 200
