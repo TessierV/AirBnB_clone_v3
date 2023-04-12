@@ -91,5 +91,5 @@ class DBStorage:
         """
         if cls is None:
             return(len(self.all()))
-        else :
+        else:
             return(len(self.all(cls)))
