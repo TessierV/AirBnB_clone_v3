@@ -14,13 +14,13 @@ def get_review(place_id):
     """Testing documentation of a module"""
     place = storage.get(Place, place_id)
 
-    if place:
+    if place is None:
+        abort(404)
+    else:
         review_list = []
         for review in place.reviews:
             review_list.append(review.to_dict())
-        return jsonify(review_list)
-    else:
-        abort(404)
+    return jsonify(review_list)
 
 
 @app_views.route('/reviews/<review_id>', strict_slashes=False, methods=['GET', 'DELETE'])
@@ -42,39 +42,34 @@ def get_review_id(review_id):
 def create_review(place_id):
     """Testing documentation of a module"""
     place = storage.get(Place, place_id)
-    if place:
-        create_review = request.get_json()
-        if create_review is None:
-            abort(400, description="Not a JSON")
-        elif 'user_id' not in create_review:
-            abort(400, description="Missing user_id")
-        elif 'text' not in create_review:
-            abort(400, description="Missing text")
-        user_id = create_review('user_id')
-        text = create_review('text')
-        user = storage.get(User, user_id)
-        if user is None:
-            abort(404)
-        new_Review = Review(place_id=place_id, user_id=user_id, text=text)
-        new_Review.save()
-        return (jsonify(new_Review.to_dict()), 201)
-    else:
+    if place is None:
         abort(404)
+    create_review = request.get_json()
+    if not create_review:
+        abort(400, description="Not a JSON")
+    elif 'user_id' not in create_review:
+        abort(400, description="Missing user_id")
+    elif 'text' not in create_review:
+        abort(400, description="Missing text")
+    create_review['place_id'] = place_id
+    user = storage.get(User, create_review['user_id'])
+    if not user:
+        abort(404)
+    new_Review = Review(**create_review)
+    new_Review.save()
+    return (jsonify(new_Review.to_dict()), 201)
 
 
 @app_views.route('/reviews/<review_id>', strict_slashes=False, methods=['PUT'])
 def update_review(review_id):
     """Testing documentation of a module"""
     review = storage.get(Review, review_id)
-    if review:
-        request_json = request.get_json()
-        if review is None:
-            abort(404)
-        elif request_json is None:
-            abort(400, description="Not a JSON")
-        else:
-            for key, val in request_json.items():
-                if key not in ['id', 'user_id', 'place_id', 'created_at', 'updated_at']:
-                    setattr(review, key, val)
-            storage.save()
-            return jsonify(review.to_dict()), 200
+    request_json = request.get_json()
+    if request_json is None:
+        abort(400, description="Not a JSON")
+    if review is None:
+        abort(404)
+    for key, val in request_json.items():
+        if key not in ['id', 'user_id', 'place_id', 'created_at', 'updated_at']:                setattr(review, key, val)
+    storage.save()
+    return jsonify(review.to_dict()), 200
