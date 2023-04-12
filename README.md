@@ -1,7 +1,11 @@
-# AirBnB Clone - The Console
+<img width="450" src="https://user-images.githubusercontent.com/113889290/227171089-94c75343-474e-4f3e-86a3-b69afaf74e50.png">
+
+<h2><a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=44&pause=1000&color=CF0000&center=true&vCenter=true&width=735&height=45&lines=The+Console+AirBnb+clone" alt="Typing SVG" /></a></h2><br>
+
 The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.
 
-#### Functionalities of this command interpreter:
+---
+## Functionalities of this command interpreter:
 * Create a new object (ex: a new User or a new Place)
 * Retrieve an object from a file, a database etc...
 * Do operations on objects (count, compute stats, etc...)
@@ -12,7 +16,6 @@ The console is the first segment of the AirBnB project at Holberton School that 
 * [Environment](#environment)
 * [Installation](#installation)
 * [File Descriptions](#file-descriptions)
-* [Usage](#usage)
 * [Examples of use](#examples-of-use)
 * [Bugs](#bugs)
 * [Authors](#authors)
@@ -28,8 +31,10 @@ This project is interpreted/tested on Ubuntu 14.04 LTS using python3 (version 3.
 * Run hbnb(non-interactively): `echo "<command>" | ./console.py`
 
 ## File Descriptions
-[console.py](console.py) - the console contains the entry point of the command interpreter. 
-List of commands this console current supports:
+#### `console` directory contains the entry point of the command interpreter.
+<details><summary>click to read more</summary><br>
+
+[console.py](console.py) - List of commands this console current supports:
 * `EOF` - exits console 
 * `quit` - exits console
 * `<emptyline>` - overwrites default emptyline method and does nothing
@@ -38,9 +43,12 @@ List of commands this console current supports:
 * `show` - Prints the string representation of an instance based on the class name and id.
 * `all` - Prints all string representation of all instances based or not on the class name. 
 * `update` - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file). 
+</details>
 
 #### `models/` directory contains classes used for this project:
 [base_model.py](/models/base_model.py) - The BaseModel class from which future classes will be derived
+<details><summary>click to read more</summary><br>
+
 * `def __init__(self, *args, **kwargs)` - Initialization of the base model
 * `def __str__(self)` - String representation of the BaseModel class
 * `def save(self)` - Updates the attribute `updated_at` with the current datetime
@@ -53,16 +61,20 @@ Classes inherited from Base Model:
 * [review.py](/models/review.py)
 * [state.py](/models/state.py)
 * [user.py](/models/user.py)
+</details>
 
 #### `/models/engine` directory contains File Storage class that handles JASON serialization and deserialization :
 [file_storage.py](/models/engine/file_storage.py) - serializes instances to a JSON file & deserializes back to instances
+<details><summary>click to read more</summary><br>
 * `def all(self)` - returns the dictionary __objects
 * `def new(self, obj)` - sets in __objects the obj with key <obj class name>.id
 * `def save(self)` - serializes __objects to the JSON file (path: __file_path)
 * ` def reload(self)` -  deserializes the JSON file to __objects
+</details>
 
 #### `/tests` directory contains all unit test cases for this project:
 [/test_models/test_base_model.py](/tests/test_models/test_base_model.py) - Contains the TestBaseModel and TestBaseModelDocs classes
+<details><summary>click to read more</summary><br>
 TestBaseModelDocs class:
 * `def setUpClass(cls)`- Set up for the doc tests
 * `def test_pep8_conformance_base_model(self)` - Test that models/base_model.py conforms to PEP8
@@ -125,7 +137,7 @@ TestBaseModel class:
 * `def test_pep8_conformance_test_user(self)` - Test that tests/test_models/test_user.py conforms to PEP8
 * `def test_user_module_docstring(self)` - Test for the user.py module docstring
 * `def test_user_class_docstring(self)` - Test for the User class docstring
-
+</details>
 
 ## Examples of use
 ```
@@ -156,9 +168,19 @@ No known bugs at this time.
 ## Authors
 Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
 Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
-Vanessa Tessier <5628@holbertonstudents.com>;
-Aymeric le Penravoux <5622@holbertonstudents.com>;
-
 Second part of Airbnb: Joann Vuong
+
 ## License
 Public Domain. No copy write protection. 
+
+<h3>Studients :
+    <a href="https://www.linkedin.com/in/">
+       <img alt="Anurag Hazra | CodeSandbox" height="20px" src="https://img.shields.io/badge/lePenravouxAymeric-4A6552?style=for-the-badge&logo=linkedin&color=red&logoColor=white" />
+    </a>
+    <a href="https://www.linkedin.com/in/vanessa-tessier-601794252/">
+        <img alt="Anurag Hazra | CodeSandbox" height="20px" src="https://img.shields.io/badge/TessierVanessa-4A6552?style=for-the-badge&logo=linkedin&color=red&logoColor=white"/>
+    </a>
+    </h3>
+<hr>
+<p align="right">Holberton School - TOULOUSE C19 Cohort APRIL. 2023
+</p>
