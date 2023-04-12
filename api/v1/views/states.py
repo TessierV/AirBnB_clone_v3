@@ -33,7 +33,7 @@ def DELETE_State(state_id):
     if state:
         storage.delete(state)
         storage.save()
-        return ({200})
+        return jsonify({}), 200
     else:
         abort(404)
 
@@ -46,7 +46,7 @@ def POST_State():
         return (jsonify({'error': 'Not a JSON'}), 400)
     elif 'name' not in req_dict:
         return (jsonify({'error': 'Missing name'}), 400)
-    new_State = State(req_dict)
+    new_State = State(**req_dict)
     new_State.save()
     return (jsonify(new_State.to_dict()), 201)
 
